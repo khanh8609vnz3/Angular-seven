@@ -1,0 +1,10 @@
+.table {
+  tr#list-header {
+    th {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+}
