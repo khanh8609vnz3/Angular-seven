@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
-
-const TOKEN = "TOKEN";
+import { Constant } from "../model/constant";
 
 @Injectable({
   providedIn: "root"
@@ -9,10 +8,10 @@ export class CustomerService {
   constructor() {}
 
   setToken(token) {
-    localStorage.setItem(TOKEN, token);
+    localStorage.setItem(Constant.TOKEN, token);
   }
 
   isLogged() {
-    return localStorage.getItem(TOKEN) || null;
+    return localStorage.getItem(Constant.TOKEN) || null;
   }
 }
