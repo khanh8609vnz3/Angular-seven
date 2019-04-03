@@ -27,22 +27,17 @@ export class HomeComponent implements OnInit {
       .pipe(map(data => JSON.parse(JSON.stringify(data))))
       .subscribe(data => {
         this.data = data;
-        console.log(data);
       });
 
-    nameObs.pipe(map(name => name.toUpperCase())).subscribe(name => {
-      console.log(name);
-    });
+    nameObs.pipe(map(name => name.toUpperCase())).subscribe(name => {});
 
     this.setData();
   }
 
   setData() {
-    this.homeService
-      .getData()
-      .subscribe(response => {
-        this.postData = response;
-      });
+    this.homeService.getData().subscribe(response => {
+      this.postData = response;
+    });
   }
 
   changeData() {

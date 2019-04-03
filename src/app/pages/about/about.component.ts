@@ -30,7 +30,6 @@ export class AboutComponent implements OnInit {
   }
 
   addEventToTableHeader() {
-    console.log(this.tableData);
     $("#table-user").DataTable({
       data: this.tableData,
       columns: [

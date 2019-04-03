@@ -16,12 +16,11 @@ export class CommonService {
   constructor(private http: HttpClient) {}
 
   setHeader() {
-    return {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem(Constant.TOKEN)}`
-      })
-    };
+    let headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem(Constant.TOKEN)}`
+    });
+    return headers;
   }
 
   handleError(error: HttpErrorResponse) {
@@ -41,13 +40,13 @@ export class CommonService {
 
   httpGet(url: string, params?: HttpParams) {
     return this.http
-      .get(url, this.setHeader())
+      .get(url, { headers: this.setHeader(), params })
       .pipe(catchError(this.handleError));
   }
 
-  httpPost(url: string, body: object) {
+  httpPost(url: string, body: object, params?: HttpParams) {
     return this.http
-      .post(url, body, this.setHeader())
+      .post(url, body, { headers: this.setHeader(), params })
       .pipe(catchError(this.handleError));
   }
 }
