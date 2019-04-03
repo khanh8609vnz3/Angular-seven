@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
-import { Router } from "@angular/router";
-import { ApiService } from 'src/app/services/api.service';
-import { CustomerService } from 'src/app/services/customer.service';
+import { Router, ActivatedRoute } from "@angular/router";
+import { LoginService } from "src/app/services/login.service";
+import { LoginResultModel } from "src/app/model/loginResultModel";
 
 @Component({
   selector: "app-login",
@@ -14,19 +14,23 @@ export class LoginComponent implements OnInit {
   password = "123456";
 
   constructor(
-    private api: ApiService,
-    private customer: CustomerService,
-    private router: Router
+    private loginService: LoginService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {}
 
   tryLogin() {
-    this.api.login(this.email, this.password).subscribe(
-      response => {
+    this.loginService.login(this.email, this.password).subscribe(
+      (response: LoginResultModel) => {
         if (response.token) {
-          this.customer.setToken(response.token);
-          this.router.navigateByUrl("/home");
+          var url: string;
+          this.loginService.setToken(response.token);
+          this.route.queryParams.subscribe(params => {
+            url = params.redirectUrl;
+          });
+          this.router.navigateByUrl(url);
         }
       },
       response => {
