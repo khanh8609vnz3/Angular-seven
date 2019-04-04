@@ -1,3 +1,3 @@
-export class LoginResultModel {
+export interface LoginResultModel {
   token: string;
 }
