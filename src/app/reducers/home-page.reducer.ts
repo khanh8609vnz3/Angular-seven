@@ -21,7 +21,6 @@ export function homePageReducer(
       return state.filter(({id}) => id !== action.id);
 
     default:
-      console.log(state);
       return state;
   }
 }
