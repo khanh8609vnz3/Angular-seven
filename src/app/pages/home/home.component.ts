@@ -5,6 +5,8 @@ import { UserModel } from "src/app/model/user.model";
 import { Observable } from "rxjs";
 import { AppState } from "../../app.state";
 import * as _ from "lodash";
+import { Constant } from "src/app/model/constant";
+declare var $;
 
 @Component({
   selector: "app-home",
@@ -30,7 +32,9 @@ export class HomeComponent implements OnInit {
       .getData()
       .subscribe((response: Observable<UserModel[]>) => {
         this.postData = response;
-        this.testLodashFunction(JSON.parse(JSON.stringify(this.postData)));
+        // this.testLodashFunction(JSON.parse(JSON.stringify(this.postData)));
+        // this.testAjaxFunction();
+        this.testJqueryAjax();
       });
   }
 
@@ -45,5 +49,29 @@ export class HomeComponent implements OnInit {
     );
     console.log(_.filter(postData, { id: 4 }));
     console.log(_.sortBy(postData, ["title"]));
+  }
+
+  testAjaxFunction() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", Constant.DUMMY_DATA_API_URL, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this);
+      }
+    };
+  }
+
+  testJqueryAjax() {
+    $.get(Constant.DUMMY_DATA_API_URL, function(data, status, xhr) {
+      console.log(data);
+      console.log(status);
+      console.log(xhr);
+    });
+  }
+
+  changeData() {
+    $("#postId1").show();
+    $("#postId1").text("asd");
   }
 }
