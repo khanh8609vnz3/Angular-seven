@@ -4,6 +4,7 @@ import { HomeComponent } from "./pages/home/home.component";
 import { LoginComponent } from "./pages/login/login.component";
 import { AuthGuardService } from "./services/auth-guard.service";
 import { SignUpComponent } from "./pages/sign-up/sign-up.component";
+import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 
 export const appRoutes: Routes = [
   {
@@ -34,5 +35,9 @@ export const appRoutes: Routes = [
     data: { title: "About" },
     canActivate: [AuthGuardService]
   },
-  { path: "**", component: HomeComponent }
+  {
+    path: "customer",
+    loadChildren: "./pages/customer-module/customer.module#CustomerModule"
+  },
+  { path: "**", component: PageNotFoundComponent }
 ];

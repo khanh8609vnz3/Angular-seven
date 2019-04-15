@@ -18,6 +18,8 @@ import { StoreModule } from "@ngrx/store";
 import { homePageReducer } from "./reducers/home-page.reducer";
 import { reducers, metaReducers } from "./reducers";
 import { SignUpComponent } from "./pages/sign-up/sign-up.component";
+import { HomeChildComponent } from "./pages/home/home-child.component";
+import { PageNotFoundComponent } from "./pages/page-not-found/page-not-found.component";
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { SignUpComponent } from "./pages/sign-up/sign-up.component";
     HomeComponent,
     HeaderComponent,
     LoginComponent,
-    SignUpComponent
+    SignUpComponent,
+    HomeChildComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

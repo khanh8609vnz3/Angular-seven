@@ -1,10 +1,26 @@
 <div>
-  {{data | json}}
+  {{ data | json }}
 </div>
-<button type="button" class="btn btn-primary" (click)="changeData()">Change data</button>
-<div class="data-div" *ngFor="let post of postData; let i = index">
-  <div [id]="'postId'+i">Id: {{post.id}}</div>
-  <div>UserId: {{post.userId}}</div>
-  <div>Title: {{post.title}}</div>
-  <div>Complete: {{post.completed}}</div>
-</div>
+<input
+  #myInput
+  type="text"
+  class="form-control"
+  name=""
+  id=""
+  aria-describedby="helpId"
+  placeholder=""
+/>
+<small id="helpId" class="form-text text-muted">Help text</small>
+<button type="button" class="btn btn-primary" (click)="changeData(myInput)">
+  Change data
+</button>
+<app-home-child
+  [data]="postData"
+  (change)="changeEventFromChild($event)"
+></app-home-child>
+<!-- <div class="data-div" *ngFor="let post of postData; let i = index">
+  <div [id]="'postId' + i">Id: {{ post.id }}</div>
+  <div>UserId: {{ post.userId }}</div>
+  <div>Title: {{ post.title }}</div>
+  <div>Complete: {{ post.completed }}</div>
+</div> -->

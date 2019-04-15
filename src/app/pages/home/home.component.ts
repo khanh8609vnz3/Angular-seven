@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { HomeService } from "./home.service";
 import { Store } from "@ngrx/store";
 import { UserModel } from "src/app/model/user.model";
@@ -6,6 +6,7 @@ import { Observable } from "rxjs";
 import { AppState } from "../../app.state";
 import * as _ from "lodash";
 import { Constant } from "src/app/model/constant";
+import { HomeChildComponent } from "./home-child.component";
 declare var $;
 
 @Component({
@@ -14,6 +15,11 @@ declare var $;
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
+  @ViewChild(HomeChildComponent)
+  myChild: HomeChildComponent;
+
+  parentData: string = "Test data";
+
   postData: Observable<UserModel[]>;
 
   constructor(
@@ -70,8 +76,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  changeData() {
-    $("#postId1").show();
-    $("#postId1").text("asd");
+  changeData(myInput) {
+    // $("#postId1").show();
+    // $("#postId1").text("asd");
+    // console.log(myInput.value);
+    this.myChild.value++;
+  }
+
+  changeEventFromChild(value) {
+    alert(value);
   }
 }
